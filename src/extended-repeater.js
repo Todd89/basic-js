@@ -21,30 +21,37 @@ export default function repeater(str, options) {
 	
 	 function f (str,{ repeatTimes = 0, separator = '+', addition = '', additionRepeatTimes = 0, additionSeparator = ''}) {
 	let	word = str;
-
-		 
-	let addWord = additionSeparator + addition;
+	if (additionSeparator[0] == ')') additionSeparator = '';
+  let addWord = ''
+  if (additionRepeatTimes > 1) {
+     addWord =  addition + additionSeparator ;
+  } else { 
+    addWord =  addition 
+  }
 	let plusWord = addWord;
 	let i = 1;
 	while (i < additionRepeatTimes-1) {
 	addWord += plusWord;
 		i++
 	}
-		
-	console.log (addWord)
-	word += addWord;
-		
-	
-	let resWord = word += separator;
+		 let resAddWord = ''
+		console.log (addWord)
+		if (additionRepeatTimes <= 1)  resAddWord  = word + addWord + separator;
+		 if (additionRepeatTimes > 1)  resAddWord  = word + addWord + addition + separator;
+		 
+		let plusAddWord =  resAddWord;
+		console.log (resAddWord)
+		 console.log (plusAddWord)
 	let j = 1;
 	while (j <= repeatTimes-1) {
-	 word += resWord;
+		 resAddWord += plusAddWord;
 		j++
 	}
-		
-	let index = word.length - 1;
-	word = word.slice(0, word.length - separator.length)
-		 return word
+		console.log (resAddWord)
+		  			 
+	resAddWord = resAddWord.slice(0, resAddWord.length - separator.length)
+		 
+		 return resAddWord
 	}
 	return f (str,options)
 }
